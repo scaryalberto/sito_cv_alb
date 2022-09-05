@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Sito cv Alberto</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.tab1cards {
+  align: center;
+}
+</style>
+</head>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="/" class="image avatar"><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+					<h1>Qui puoi trovare i miei appunti, i miei memo. Poche righe sparse in cui raccolgo informazioni ed esperienze che possono tornare utili a me e ad altri. Perchè blog? Perchè in fin dei conti è una raccolta di piccoli post (-it). Anche se ad essere sincero forse dovrei usre un altro nome.</h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Blog<br /></h2>
+					</section>
+
+				<!-- Posts -->
+
+				{% for post in posts %}
+
+					<section id="one">
+							<div class="tab1cards">
+
+							<div class="card">
+							  <img src="/media/{{post.image.url}}" alt="{{ post.title }}" style="width:100%">
+							  <div class="container">
+								<a href="https://codepo8.github.io/dog-browser/"><h4><b>{{ post.title }}</b></h4>
+								<p>{{ post.summary }}</p></a>
+							  </div>
+							</div>
+							</div>
+
+					</section>
+
+					{% endfor %}
+
+
+
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
