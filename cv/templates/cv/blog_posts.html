@@ -51,7 +51,8 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>Blog<br /></h2>
+							<a href="#"><h2>Blog</h2></a><br/>
+
 					</section>
 
 				<!-- Posts -->
@@ -62,9 +63,9 @@
 							<div class="tab1cards">
 
 							<div class="card">
-							  <img src="/media/{{post.image.url}}" alt="{{ post.title }}" style="width:100%">
+							  <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width:100%">
 							  <div class="container">
-								<a href="https://codepo8.github.io/dog-browser/"><h4><b>{{ post.title }}</b></h4>
+								<a href="/{{ post.id }}"><h4><b>{{ post.title }}</b></h4>
 								<p>{{ post.summary }}</p></a>
 							  </div>
 							</div>

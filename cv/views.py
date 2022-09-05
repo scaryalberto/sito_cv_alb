@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import BlogArticles
 # Create your views here.
 
@@ -10,5 +10,7 @@ def blog_posts(request):
     print(posts)
     return render(request, 'cv/blog_posts.html', {'posts': posts})
 
-def article(request):
-    return render(request, 'cv/article.html', {})
+
+def article(request, id):
+    post = get_object_or_404(BlogArticles, id=id)
+    return render(request, 'cv/article.html', {'post':post})
