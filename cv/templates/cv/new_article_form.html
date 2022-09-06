@@ -14,25 +14,6 @@
 		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
 		<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 40%;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-  padding: 2px 16px;
-}
-
-.tab1cards {
-  align: center;
-}
-</style>
 </head>
 	</head>
 	<body class="is-preload">
@@ -49,31 +30,30 @@
 			<div id="main">
 
 				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<a href="/add_article"><h2>Blog</h2></a><br/>
 
-					</section>
+
+						<header class="major">
+							<a href="#"><h2>Aggiungi un articolo</h2></a><br/>
+								<form action = "" method = "post" enctype="multipart/form-data">
+									{% csrf_token %}
+									{{ form }}
+																<br/>
+
+							<ul class="actions">
+								<input type="submit" value="Pubblica" method="post" class="button">
+							</ul>
+
+								</form>
+
+
+
 
 				<!-- Posts -->
 
-				{% for post in posts %}
 
 					<section id="one">
-							<div class="tab1cards">
-
-							<div class="card">
-							  <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width:100%">
-							  <div class="container">
-								<a href="/{{ post.id }}"><h4><b>{{ post.title }}</b></h4>
-								<p>{{ post.summary }}</p></a>
-							  </div>
-							</div>
-							</div>
 
 					</section>
-
-					{% endfor %}
 
 
 
