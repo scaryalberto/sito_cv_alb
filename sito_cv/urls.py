@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('cv.urls'))
+    path('', include('cv.urls')),
+    path("accounts/", include("django.contrib.auth.urls")), #necessario per creare la pagina di login
 
 ]
