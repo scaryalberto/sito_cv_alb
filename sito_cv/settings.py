@@ -77,7 +77,8 @@ WSGI_APPLICATION = 'sito_cv.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'var/www/sito_cv_alb/db.sqlite3'
     }
 }
 
