@@ -35,8 +35,8 @@ def add_article(request):
     # check if form data is valid
     if form.is_valid():
         # save the form data to model
-        now = datetime.now()
-        form.data=now.date()
+        #now = datetime.now()
+        #form.data=now.date()
         messages.success(request,'Data has been submitted')
 
         form.save()
@@ -46,3 +46,7 @@ def add_article(request):
     context['form'] = form
     return render(request, "cv/new_article_form.html", context)
 
+
+def article(request):
+
+    return render(request, 'cv/login.html')
