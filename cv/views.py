@@ -45,8 +45,3 @@ def add_article(request):
 
     context['form'] = form
     return render(request, "cv/new_article_form.html", context)
-
-
-def article(request):
-
-    return render(request, 'cv/login.html')
