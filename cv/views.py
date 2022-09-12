@@ -15,8 +15,8 @@ def blog_posts(request):
 
 
 def article(request, id):
-    post = get_object_or_404(BlogArticles, id=int(id))
-    return render(request, 'cv/article.html', {'post':post})
+    post = get_object_or_404(BlogArticles, pk=int(id))
+    return render(request, 'cv/article.html', {'post': post})
 
 from django.shortcuts import redirect
 
