@@ -10,7 +10,7 @@ def home_page(request):
 
 def blog_posts(request):
     posts = BlogArticles.objects.all()
-    print(posts)
+    print(posts)#TODO: inserire order by date... ma al contrario (dal piu giovane al piu vecchio)
     return render(request, 'cv/blog_posts.html', {'posts': posts})
 
 
