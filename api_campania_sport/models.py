@@ -21,16 +21,6 @@ class CampaniaSportArticles(models.Model):#post del blog mio
 
 from django.db import models
 
-class ArticlesToCampaniaSport(models.Model):#api per campaniasport
-    title = models.TextField()
-    body = models.TextField()
-    image_url = models.URLField(default='http://www.campaniasport.it/')
-    source = models.CharField(max_length=200) #es. www.campaniasport.it
-
-    def __str__(self):
-        return self.source
-
-
 class Monuments(models.Model):
     name = models.TextField()
     description = models.TextField()

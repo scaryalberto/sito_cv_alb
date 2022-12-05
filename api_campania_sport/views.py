@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from .models import Articles, Monuments
+from .models import CampaniaSportArticles, Monuments
 from django.core import serializers
 
 from rest_framework.response import Response
@@ -10,10 +10,10 @@ import json
 class ArticleView(APIView):
     def get(self, request):
         if request.method == 'GET':
-            queryset = Articles.objects.all()
+            queryset = CampaniaSportArticles.objects.all()
             print(queryset)
 
-            queryset = serializers.serialize("json", Articles.objects.all())
+            queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
             queryset = json.loads(queryset)
 
             return Response(queryset)
