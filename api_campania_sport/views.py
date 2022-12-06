@@ -1,4 +1,3 @@
-from rest_framework import viewsets
 
 from .models import CampaniaSportArticles, Monuments
 from django.core import serializers
@@ -16,7 +15,10 @@ class ArticleView(APIView):
             queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
             queryset = json.loads(queryset)
 
-            return Response(queryset)
+            from django.http import JsonResponse
+
+            return JsonResponse({'all_campaniasport_articles': queryset})
+            #return Response(queryset)
 
 class Monumenti(APIView):
     def get(self, request):

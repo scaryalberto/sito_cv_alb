@@ -7,10 +7,8 @@ from django.db import models
 from django.db import models
 
 class CampaniaSportArticles(models.Model):#post del blog mio
-  title = models.CharField(max_length=255)
-  summary = models.CharField(max_length=255)
-  date = models.DateField(default=datetime.date.today)
-  image = models.ImageField(null=True, upload_to='image/')
+  title = models.TextField(max_length=255)
+  image_url = models.TextField(null=True)
   text = models.TextField(null=True)
 
   def __str__(self):
