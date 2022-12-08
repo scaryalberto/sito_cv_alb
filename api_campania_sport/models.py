@@ -10,6 +10,8 @@ class CampaniaSportArticles(models.Model):#post del blog mio
   title = models.TextField(max_length=255)
   image_url = models.TextField(null=True)
   text = models.TextField(null=True)
+  article_url = models.TextField(null=True)
+  title_for_list=models.TextField(null=True, max_length=255)
 
   def __str__(self):
     return self.title
