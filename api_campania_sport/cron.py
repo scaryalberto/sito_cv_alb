@@ -3,10 +3,21 @@ import requests
 from bs4 import BeautifulSoup
 from api_campania_sport.models import CampaniaSportArticles
 
+def delete_old_articles():
+    """
+    crontab che consente di cancellare tutti gli articoli presi con lo scraping il giorno prima. Parte alle 2 di notte
+    :return:
+    """
+    CampaniaSportArticles.objects.all().delete()
+
+
 def start():
+    """
+    crontab che parte ogni 2 ore e mi serve per popolare l'api dell'app
+    :return:
+    """
     with open('prova____.txt', 'x') as f:
         f.write('Create a new text file!')
-    #CampaniaSportArticles.objects.all().delete()
     df = pd.DataFrame(columns=["title", "summary", "image_url", "text", "article_url", "title_for_list"])
 
     r = requests.get('http://www.campaniasport.it/?s=')
@@ -59,7 +70,6 @@ def start():
                  'article_url': link},
                 ignore_index=True)
             # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
-            # CampaniaSportArticles.objects.all().delete()
 
 
         except:
@@ -72,7 +82,6 @@ def start():
     # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
 
     # retrieving all the elements
-    # of the dataframe using collect()
     # Storing in the variable
     for ind in df.index:
         print(df['title'][ind], df['image_url'][ind])
@@ -128,7 +137,3 @@ def change_date(date_article):
     print(datetime)
 
     return datetime
-
-
-
-start()
