@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 from api_campania_sport.models import CampaniaSportArticles
 
 def start():
+    with open('prova____.txt', 'x') as f:
+        f.write('Create a new text file!')
     #CampaniaSportArticles.objects.all().delete()
     df = pd.DataFrame(columns=["title", "summary", "image_url", "text", "article_url", "title_for_list"])
 
