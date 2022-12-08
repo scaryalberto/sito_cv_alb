@@ -119,9 +119,7 @@ USE_L10N = True
 USE_TZ = True
 
 CRONJOBS = [#https://www.meusec.com/dev/how-to-setup-cron-jobs-in-django/
-    ('0 0 2 1 * ?', 'api_campania_sport.cron.start')
-    #('0 */12 * * *', 'palestra_app.cron.copy_db')
-    #('* * * * *', 'palestra_app.cron.start_due')
+    ('0 0 */2 ? * *', 'api_campania_sport.cron.start')
 ]
 
 
