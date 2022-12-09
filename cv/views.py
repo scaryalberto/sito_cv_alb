@@ -21,7 +21,7 @@ def article_detail(request, id):
 from django.shortcuts import redirect
 
 @login_required
-def add_article(request):
+def create_article(request):
     context = {}
 
     # create object of form
