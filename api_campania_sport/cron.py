@@ -17,6 +17,11 @@ def start():
     crontab che parte ogni 2 ore e mi serve per popolare l'api dell'app
     :return:
     """
+    urls_into_db = []#vediamo quali link abbiamo nel db
+    queryset = CampaniaSportArticles.objects.all()
+    for x, new_val in enumerate(queryset):
+        urls_into_db.append(queryset[x].article_url)
+
     df = pd.DataFrame(columns=["title", "summary", "image_url", "text", "article_url", "title_for_list"])
 
     r = requests.get('http://www.campaniasport.it/?s=')
@@ -45,6 +50,9 @@ def start():
     for link in all_links:
         try:
             print(link)
+            #se il link che stiamo analizzando si trova già nel db, passiamo a quello successivo
+            if link in urls_into_db:
+                continue
             r = requests.get(link)
             soup = BeautifulSoup(r.content, 'html.parser')
 

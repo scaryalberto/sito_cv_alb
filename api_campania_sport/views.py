@@ -12,10 +12,6 @@ import json
 class ArticleView(APIView):
     def get(self, request):
         if request.method == 'GET':
-            #CampaniaSportArticles.objects.all().delete()
-            queryset = CampaniaSportArticles.objects.all()
-            print(queryset)
-
             queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
             queryset = json.loads(queryset)
 
