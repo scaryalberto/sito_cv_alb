@@ -18,7 +18,7 @@ class ArticleView(APIView):
             from django.http import JsonResponse
 
             return JsonResponse({'all_campaniasport_articles': queryset})
-            #return Response(queryset)
+
 
 def get_image_url(soup):
     soup_like_string = str(soup)
