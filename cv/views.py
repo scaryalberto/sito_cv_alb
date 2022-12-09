@@ -14,7 +14,7 @@ def blog_posts(request):
     return render(request, 'cv/blog_posts.html', {'posts': posts})
 
 
-def article(request, id):
+def article_detail(request, id):
     post = get_object_or_404(BlogArticles, pk=id)
     return render(request, 'cv/article.html', {'post': post})
 
