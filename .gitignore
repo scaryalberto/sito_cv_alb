@@ -8,6 +8,8 @@
 __pycache__/
 local_settings.py
 db.sqlite3
+C:\Users\alsg\PycharmProjects\sito_cv_alb\api_campania_sport\migrations\*
+C:\Users\alsg\PycharmProjects\sito_cv_alb\cv\migrations\*
 db.sqlite3-journal
 media
 
