@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from api_campania_sport.models import CampaniaSportArticles
 
+
 def delete_old_articles():
     """
     crontab che consente di cancellare tutti gli articoli presi con lo scraping il giorno prima. Parte alle 2 di notte
@@ -16,8 +17,6 @@ def start():
     crontab che parte ogni 2 ore e mi serve per popolare l'api dell'app
     :return:
     """
-    with open('prova____.txt', 'x') as f:
-        f.write('Create a new text file!')
     df = pd.DataFrame(columns=["title", "summary", "image_url", "text", "article_url", "title_for_list"])
 
     r = requests.get('http://www.campaniasport.it/?s=')
