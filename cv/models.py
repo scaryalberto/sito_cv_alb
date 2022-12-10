@@ -10,7 +10,7 @@ class BlogArticles(models.Model):
   title = models.CharField(max_length=255)
   summary = models.CharField(max_length=255)
   date = models.DateField(default=datetime.date.today)
-  image = models.ImageField(null=True, upload_to='image/image/')
+  image = models.ImageField(null=True, upload_to='image/')
   text = models.TextField(null=True)
   #upload = models.ImageField(upload_to='uploads/')
 
