@@ -40,7 +40,7 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="/" class="image avatar"><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+					<a href="/" class="image avatar"><img src="https://avatars.githubusercontent.com/u/55685868?v=4" alt="" /></a>
 					<h1>Qui puoi trovare i miei appunti, i miei memo. Poche righe sparse in cui raccolgo informazioni ed esperienze che possono tornare utili a me e ad altri. Perchè blog? Perchè in fin dei conti è una raccolta di piccoli post (-it). Anche se ad essere sincero forse dovrei usre un altro nome.</h1>
 				</div>
 			</header>
@@ -65,7 +65,7 @@
 							<div class="card">
 							  <img src="{{ post.image_url }}" alt="{{ post.title }}" style="width:100%">
 							  <div class="container">
-								<a href="/{{ post.pk }}"><h4><b>{{ post.title }}</b></h4>
+								<a href="/article/{{ post.pk }}"><h4><b>{{ post.title }}</b></h4>
 								<p>{{ post.summary }}</p></a>
 							  </div>
 							</div>
