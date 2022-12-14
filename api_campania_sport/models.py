@@ -28,7 +28,7 @@ class Monuments(models.Model):
     city_location = models.CharField(max_length=200) #es. Caserta
 
     def __str__(self):
-        return self.name + self.city_location
+        return self.name + ' '+ self.city_location
 
 
 

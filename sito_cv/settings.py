@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cv',
-    'api_campania_sport'
+    'cv',#setting.py
+    'api_campania_sport',#app per ottere le api di campaniasport
 
 ]
 

@@ -86,3 +86,13 @@ def get_image_url(soup):
     return image_url.replace('"', '')
 
 
+
+class MonumentView(APIView):
+    def get(self, request):
+        if request.method == 'GET':
+            queryset = serializers.serialize("json", Monuments.objects.all())
+            queryset = json.loads(queryset)
+
+            from django.http import JsonResponse
+
+            return JsonResponse({'all_monuments': queryset})
