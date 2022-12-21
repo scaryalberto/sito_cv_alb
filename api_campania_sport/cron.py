@@ -144,3 +144,7 @@ def change_date(date_article):
     print(datetime)
 
     return datetime
+
+from scraping_trust_pilot_class import scraping_trust_pilot
+def scraping_reviews():
+    scraping_trust_pilot()

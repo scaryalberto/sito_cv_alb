@@ -17,10 +17,6 @@ class CampaniaSportArticles(models.Model):#post del blog mio
     return self.title
 
 
-# posts / models.py
-
-from django.db import models
-
 class Monuments(models.Model):
     name = models.TextField()
     description = models.TextField()
@@ -30,5 +26,25 @@ class Monuments(models.Model):
     def __str__(self):
         return self.name + ' '+ self.city_location
 
+class ScrapingReviewsUrls(models.Model):#parola già cercato
+    url = models.TextField()
 
+    def __str__(self):
+        return self.word
+
+
+class ScrapingReviewsWords(models.Model):#parola già cercato
+    word = models.TextField()
+
+    def __str__(self):
+        return self.word
+
+
+class Reviews(models.Model):#link da unire a trustpilot
+    url = models.TextField()#fonte della recensione
+    vote = models.IntegerField()#number of stars
+    text_review = models.TextField()
+
+    def __str__(self):
+        return self.url
 

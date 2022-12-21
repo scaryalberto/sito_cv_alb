@@ -9,6 +9,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
 
+
+class AlbertoBotView(APIView):
+    def get(self, request):
+        if request.method == 'GET':
+            #todo: inserire le domande che posso fare ad laberto ed eventualemte il gioco
+            queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
+            queryset = json.loads(queryset)
+
+            from django.http import JsonResponse
+
+            return JsonResponse({'all_campaniasport_articles': queryset})
+
+
 class ArticleView(APIView):
     def get(self, request):
         if request.method == 'GET':
