@@ -43,7 +43,7 @@ def start():
 
         n = n + 1
 
-    # ciclo su ogni link e  compongo il diz dell'articolo: titolo, body, image_url
+    # ciclo su ogni link e compongo il diz dell'articolo: titolo, body, image_url
 
     all_links = list(set(all_links))
 
@@ -63,7 +63,8 @@ def start():
                 image_url = "https://th.bing.com/th/id/OIP.gnUTTRvGWBshUURB5OBkhQHaHa?pid=ImgDet&rs=1"
             date_article = soup.find('time', class_="entry-date updated td-module-date").text
             datetime_article = change_date(date_article)
-            body = body.replace('\n', '').replace('\u200b', '')
+            #tolgo il body, così se uno vuole usare l'api si dovrà collegare al sito di mio fratello
+            body = ""#body.replace('\n', '').replace('\u200b', '')
             title = soup.find('title').text
             title = title.replace('| Campania Sport', '')
             article = {'title': title, 'body': body, 'image_url': image_url, 'date_article': datetime_article}
