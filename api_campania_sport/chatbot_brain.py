@@ -12,6 +12,7 @@ domande_e_risposte = {
     "cosa fai": "sostiuisco alberto quando non può rispondere",
     "che squadra tifa alberto?": "Tifa Juve, la squadra più forte del mondo",
     "come funzioni": "Mi ha creato alberto, ha utilizzato la distanza di Levenstei per aiutarmi  a capire le domande, se vuoi puoi trovare info qui: https://it.wikipedia.org/wiki/Distanza_di_Levenshtein",
+    "help": "tu sei il capo, potresti chiedermi: che ore sono, oppure cosa fa Alberto",
     "che tempo fa oggi": "Non lo so, non so di dove sei. Apri la finestra e vedi",
     "dimmi qualcosa": "tu sei il capo, potresti chiedermi: che ore sono, oppure cosa fa Alberto",
     "quando sei nato": "Nel 2022... sono piccolo",
@@ -45,7 +46,7 @@ def question_for_bot (domanda):
 
     else:
         random_choice=random.randrange(0, len(domande_e_risposte.keys()))
-        print(f"Scusami, ma non ho capito la domanda. Ho ancora tanto da imaparare. Magari potresti chiedermi: {list(domande_e_risposte.keys())[random_choice]}?")
+        print(f"Scusami, ma non ho capito la domanda. Ho ancora tanto da imparare. Magari potresti chiedermi: {list(domande_e_risposte.keys())[random_choice]}?")
 
 
-question_for_bot("che giorno è oggi")
+question_for_bot("progetti alberto")
