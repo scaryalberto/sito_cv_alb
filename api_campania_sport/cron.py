@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from api_campania_sport.models import CampaniaSportArticles, ScrapingReviewsUrls
-
+from scraping_trust_pilot_class import scraping_trust_pilot
 
 def delete_old_articles():
     """
@@ -83,6 +83,8 @@ def start():
         except:
             continue
 
+        scraping_trust_pilot()
+
     # TODO: inserire il codice necessario al popolare il db sql
     print("ECCOLO")
     print(df)
@@ -147,8 +149,6 @@ def change_date(date_article):
 
     return datetime
 
-
-from scraping_trust_pilot_class import scraping_trust_pilot
 
 
 def scraping_reviews():
