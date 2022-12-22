@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from api_campania_sport.models import CampaniaSportArticles
+from api_campania_sport.models import CampaniaSportArticles, ScrapingReviewsUrls
 
 
 def delete_old_articles():
@@ -17,7 +17,7 @@ def start():
     crontab che parte ogni 2 ore e mi serve per popolare l'api dell'app
     :return:
     """
-    urls_into_db = []#vediamo quali link abbiamo nel db
+    urls_into_db = []  # vediamo quali link abbiamo nel db
     queryset = CampaniaSportArticles.objects.all()
     for x, new_val in enumerate(queryset):
         urls_into_db.append(queryset[x].article_url)
@@ -50,7 +50,7 @@ def start():
     for link in all_links:
         try:
             print(link)
-            #se il link che stiamo analizzando si trova già nel db, passiamo a quello successivo
+            # se il link che stiamo analizzando si trova già nel db, passiamo a quello successivo
             if link in urls_into_db:
                 continue
             r = requests.get(link)
@@ -68,12 +68,13 @@ def start():
             title = title.replace('| Campania Sport', '')
             article = {'title': title, 'body': body, 'image_url': image_url, 'date_article': datetime_article}
             print(article)
-            if len(title)>110:
-                title_for_list=title[0:100]+'...'
+            if len(title) > 110:
+                title_for_list = title[0:100] + '...'
             else:
-                title_for_list=title
+                title_for_list = title
             df = df.append(
-                {"title": title, "title_for_list":title_for_list, "image_url": image_url, "text": body, 'date_article': datetime_article,
+                {"title": title, "title_for_list": title_for_list, "image_url": image_url, "text": body,
+                 'date_article': datetime_article,
                  'article_url': link},
                 ignore_index=True)
             # https://stackoverflow.com/questions/34425607/how-to-write-a-pandas-dataframe-to-django-model
@@ -100,51 +101,57 @@ def start():
 
 
 def get_image_url(soup):
-    soup_like_string=str(soup)
-    image_url=soup_like_string.split('data-orig-file=')[1].split(' ')[0]
+    soup_like_string = str(soup)
+    image_url = soup_like_string.split('data-orig-file=')[1].split(' ')[0]
     return image_url.replace('"', '')
+
 
 def change_date(date_article):
     from datetime import datetime
 
-    date_article=date_article.split(' ')[1:]
+    date_article = date_article.split(' ')[1:]
     if date_article[1].lower() == 'gennaio':
-        month='1'
+        month = '1'
     elif date_article[1].lower() == 'febbraio':
-        month='2'
+        month = '2'
     elif date_article[1].lower() == 'marzo':
-        month='3'
+        month = '3'
     elif date_article[1].lower() == 'aprile':
-        month='4'
+        month = '4'
     elif date_article[1].lower() == 'maggio':
-        month='5'
+        month = '5'
 
     elif date_article[1].lower() == 'giugno':
-        month='6'
+        month = '6'
 
     elif date_article[1].lower() == 'luglio':
-        month='7'
+        month = '7'
 
     elif date_article[1].lower() == 'agosto':
-        month='8'
+        month = '8'
 
     elif date_article[1].lower() == 'settembre':
-        month='9'
+        month = '9'
 
     elif date_article[1].lower() == 'ottobre':
-        month='10'
+        month = '10'
 
     elif date_article[1].lower() == 'novembre':
-        month='11'
+        month = '11'
 
     elif date_article[1].lower() == 'dicembre':
-        month='12'
+        month = '12'
 
-    datetime = datetime.strptime(date_article[2]+'-'+month+'-'+date_article[0], '%Y-%m-%d')
+    datetime = datetime.strptime(date_article[2] + '-' + month + '-' + date_article[0], '%Y-%m-%d')
     print(datetime)
 
     return datetime
 
+
 from scraping_trust_pilot_class import scraping_trust_pilot
+
+
 def scraping_reviews():
+    new_url = ScrapingReviewsUrls(url="link_inserito_a_mano")
+    new_url.save()
     scraping_trust_pilot()
