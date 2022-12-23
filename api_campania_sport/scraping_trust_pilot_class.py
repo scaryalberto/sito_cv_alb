@@ -16,6 +16,9 @@ def scraping_trust_pilot():
     n_parola = 0
 
     for idx, i in enumerate(prodotti_da_cercare):
+        found_word = ScrapingReviewsWords(word=i)
+        found_word.save()
+
         #se la parola è già stata cercata si passa alla prossima
         if len(ScrapingReviewsWords.objects.filter(word=i))>0:
             continue
