@@ -155,4 +155,4 @@ def change_date(date_article):
 def scraping_reviews():
     new_url = ScrapingReviewsUrls(url="link_inserito_a_mano")
     new_url.save()
-    scraping_trust_pilot()
+    #scraping_trust_pilot()
