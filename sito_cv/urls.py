@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='API Documentation')
 
 urlpatterns = [
+    path('swagger/', schema_view),
     path('admin/', admin.site.urls),
     path('', include('cv.urls')),
     path("accounts/", include("django.contrib.auth.urls")), #necessario per creare la pagina di login
-    path('api/', include('api_campania_sport.urls'))
-
+    path('api/', include('api_campania_sport.urls')), #http://127.0.0.1:8000/api/campaniasport/
+    path('fleet_flights/', include('aviation_management_system.urls')), #http://127.0.0.1:8000/fleet_flights/made_flights/
 
 ]
+
+
