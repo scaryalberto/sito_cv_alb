@@ -23,40 +23,43 @@
           
           $.ajax(settings).then(function (response) {
 
+            var lines = [];
+
+            var map = L.map('map').setView([41, 8], 4);            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
             response.flights.forEach(function(flight) {
                 console.log(flight);
-
-                var partenza = flight.fields._from_coordinate; // Coordinate di Barcellona
+            
+                var partenza = flight.fields._from_coordinate; // Coordinate di partenza
                 partenza = partenza.replace("(", "[");
                 partenza = partenza.replace(")", "]");
                 partenza = JSON.parse(partenza);
-                console.log("FATTO partenza")
-
-                var arrivo = flight.fields._to_coordinate; // Coordinate di Napoli
+            
+                var arrivo = flight.fields._to_coordinate; // Coordinate di arrivo
                 arrivo = arrivo.replace("(", "[");
                 arrivo = arrivo.replace(")", "]");
                 arrivo = JSON.parse(arrivo);
-                console.log("FATTO ARRIVO")
-
-                var map = L.map('map').setView([41, 8], 4);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                //crea i markers sulla mappa
+            
+            
+                // Crea i marker sulla mappa
                 L.marker(partenza).addTo(map).bindPopup(flight.fields._from);
                 L.marker(arrivo).addTo(map).bindPopup(flight.fields.to);
-
-                //crea la linea da barcellona a napoli
-                var line = L.polyline([partenza, arrivo], {color: 'red'}).addTo(map);
-
-
-        
-
-        
             
-              });              
+                // Crea la linea dalla partenza all'arrivo
+                // Genera un numero casuale compreso tra 0 e 255 per i valori RGB
+                const red = Math.floor(Math.random() * 256);
+                const green = Math.floor(Math.random() * 256);
+                const blue = Math.floor(Math.random() * 256);
+                // Crea la stringa CSS per il colore RGB generato
+                const randomColor = `rgb(${red}, ${green}, ${blue})`;
+                var line = L.polyline([partenza, arrivo], { color: randomColor }).addTo(map);
+                console.log("PRIMO")
+
+            });
+            
 
 
           }, function (error) {
