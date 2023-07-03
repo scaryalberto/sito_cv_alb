@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.core import serializers
 from django.http import JsonResponse
+from django.shortcuts import render
+from aviation_management_system.city_coordinate import get_coordinates, calcola_orario_arrivo
 
 from .models import Aircrafts, Flights
 
@@ -94,22 +96,31 @@ class FlightsView(APIView):
                 from_coordinate = get_coordinates(request.query_params.get('from'))
                 to_coordinate = get_coordinates(request.query_params.get('to'))
 
+                #calcolo i tempi di percorrenza e quindi l'orario di arrivo
+                end_datetime=calcola_orario_arrivo(request.query_params.get('from'), request.query_params.get('to'))
+
 
                 if request.query_params.get('start_date') is not None or request.query_params.get('start_time') is not None:
                     start_datetime = f"{request.query_params.get('start_date')} {request.query_params.get('start_time')}:00"
                     start_datetime = datetime.datetime.strptime(start_datetime, '%Y-%m-%d %H:%M:%S')
                     if start_datetime < now:
                         return JsonResponse({'ERROR': {"La data di partenza è antecedente ad oggi": ""}})
+                    else:
+                        from datetime import timedelta
 
-                if request.query_params.get('end_date') is not None or request.query_params.get(
-                        'end_time') is not None:
-                    end_datetime = f"{request.query_params.get('end_date')} {request.query_params.get('end_time')}:00"
-                    end_datetime = datetime.datetime.strptime(end_datetime, '%Y-%m-%d %H:%M:%S')
-                    if end_datetime < now:
-                        return JsonResponse({'ERROR': {"The arrival date is prior to the departure date": ""}})
-
-                    if end_datetime < start_datetime:
-                        return JsonResponse({'ERROR': {"The departure date is prior to the arrival date": ""}})
+                        #calcoliamo la data di arrivo
+                        # Converti l'orario di partenza in un oggetto datetime
+                        orario_partenza = start_datetime
+                        # Converti l'intervallo di tempo in un oggetto timedelta
+                        intervallo = datetime.datetime.strptime(end_datetime, "%H:%M")
+                        intervallo_tempo = timedelta(hours=intervallo.hour, minutes=intervallo.minute)
+                        # Somma l'orario di partenza e l'intervallo di tempo
+                        orario_arrivo = orario_partenza + intervallo_tempo
+                        # Restituisci l'orario di arrivo nel formato "HH:MM"
+                        #TODO: ci sono 2 problemi da risolvere: il cambio di giorno (se per esempio il volo parte poco prima di mezanotte) ed il fuso orario
+                        end_datetime=orario_arrivo.strftime("%H:%M")
+                        end_datetime = f"{request.query_params.get('start_date')} {end_datetime}:00"
+                        end_datetime = datetime.datetime.strptime(end_datetime, '%Y-%m-%d %H:%M:%S')
 
                 if 'aircraft_code' in request.query_params:
                     aircraft = Aircrafts.objects.filter(name__contains=request.query_params.get('aircraft_code'))
@@ -167,8 +178,6 @@ class FlightsView(APIView):
         return JsonResponse({'UPDATE SUCCESS': {"flight_id": flight.id, "new_name": flight.aircraft_name}})
 
 
-from django.shortcuts import render
-from aviation_management_system.city_coordinate import get_coordinates
 
 def mappa(request):
     flights = Flights.objects.all()

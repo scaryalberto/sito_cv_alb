@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from .models import BlogArticles
+from .models import BlogArticles, GftMessages
 from .forms import NewArticleForm
 
 def home_page(request):
@@ -12,6 +12,12 @@ def blog_posts(request):
     posts = BlogArticles.objects.all()
     print(posts)#TODO: inserire order by date... ma al contrario (dal piu giovane al piu vecchio)
     return render(request, 'cv/blog_posts.html', {'posts': posts})
+
+def es_gft(request):
+    posts = GftMessages.objects.all()
+    print(posts)#TODO: inserire order by date... ma al contrario (dal piu giovane al piu vecchio)
+    return render(request, 'cv/gft_messages.html', {'posts': posts})
+
 
 
 def article_detail(request, id):

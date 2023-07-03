@@ -13,7 +13,7 @@ import json
 class AlbertoBotView(APIView):
     def get(self, request):
         if request.method == 'GET':
-            #todo: inserire le domande che posso fare ad laberto ed eventualemte il gioco
+            #todo: inserire le domande che posso fare ad alberto ed eventualemte il gioco
             queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
             queryset = json.loads(queryset)
 

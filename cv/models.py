@@ -18,3 +18,11 @@ class BlogArticles(models.Model):
     return self.title
 
 
+class GftMessages(models.Model):
+  tweet = models.CharField(max_length=300)
+
+  def __str__(self):
+    return self.tweet
+
+
+
