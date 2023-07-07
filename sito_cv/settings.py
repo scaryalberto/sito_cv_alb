@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'cv',
     'api_campania_sport',
     'aviation_management_system',
-    'corsheaders'
+    'corsheaders',
+    'monuments'
 
 ]
 

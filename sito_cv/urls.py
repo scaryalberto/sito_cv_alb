@@ -26,6 +26,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")), #necessario per creare la pagina di login
     path('api/', include('api_campania_sport.urls')), #http://127.0.0.1:8000/api/campaniasport/
     path('fleet_flights/', include('aviation_management_system.urls')), #http://127.0.0.1:8000/fleet_flights/made_flights/
+    path('monuments/', include('monuments.urls')),
 
 ]
 
