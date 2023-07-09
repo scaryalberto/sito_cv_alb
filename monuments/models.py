@@ -6,6 +6,7 @@ class Monuments(models.Model):
   long = models.CharField(max_length=300, null=True)
   lat = models.CharField(max_length=300, null=True)
   url_image = models.CharField(max_length=300)
+  url_google_maps = models.TextField(null=True)
   description = models.TextField()
 
   def __str__(self):
