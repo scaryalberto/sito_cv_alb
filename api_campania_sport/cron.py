@@ -9,7 +9,8 @@ def delete_old_articles():
     crontab che consente di cancellare tutti gli articoli presi con lo scraping il giorno prima. Parte alle 2 di notte
     :return:
     """
-    CampaniaSportArticles.objects.all().delete()
+    print("togli il commento dopo")
+    #CampaniaSportArticles.objects.all().delete()
 
 
 def start():
@@ -17,7 +18,9 @@ def start():
     crontab che parte ogni 2 ore e mi serve per popolare l'api dell'app
     :return:
     """
-    urls_into_db = []  # vediamo quali link abbiamo nel db
+
+    #vediamo quali link abbiamo nel db
+    urls_into_db = []
     queryset = CampaniaSportArticles.objects.all()
     for x, new_val in enumerate(queryset):
         urls_into_db.append(queryset[x].article_url)
@@ -60,9 +63,11 @@ def start():
             try:
                 image_url = get_image_url(soup.find('div', class_="postie-attachments"))
             except:
+                #se l'articolo non ha la foto la mettiamo d'ufficio
                 image_url = "https://th.bing.com/th/id/OIP.gnUTTRvGWBshUURB5OBkhQHaHa?pid=ImgDet&rs=1"
             date_article = soup.find('time', class_="entry-date updated td-module-date").text
             datetime_article = change_date(date_article)
+
             #tolgo il body, così se uno vuole usare l'api si dovrà collegare al sito di mio fratello
             body = ""#body.replace('\n', '').replace('\u200b', '')
             title = soup.find('title').text
@@ -84,7 +89,7 @@ def start():
         except:
             continue
 
-        scraping_trust_pilot()
+        #scraping_trust_pilot()
 
     # TODO: inserire il codice necessario al popolare il db sql
     print("ECCOLO")
