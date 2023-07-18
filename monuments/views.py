@@ -19,7 +19,6 @@ class MonumentsView(APIView):
     """
     def get(self, request):
         if request.method == 'GET':
-            CampaniaSportArticles.objects.all().delete()
 
             messages = Monuments.objects.all()
             queryset_values = messages.values()  # Ottieni una lista di dizionari
