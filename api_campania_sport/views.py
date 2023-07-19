@@ -1,6 +1,10 @@
+import threading
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from django.http import JsonResponse
+
 from api_campania_sport.models import CampaniaSportArticles
 from .models import CampaniaSportArticles, Monuments
 from django.core import serializers
@@ -21,17 +25,37 @@ class AlbertoBotView(APIView):
 
             return JsonResponse({'all_campaniasport_articles': queryset})
 
-
+from api_campania_sport.cron import start
 class ArticleView(APIView):
+
     def get(self, request):
         if request.method == 'GET':
+            queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
+            queryset = json.loads(queryset)
+
+            # Avvia il metodo start() in un thread separato, in modo che il metodo guinge fino alla fine senza attese
+            thread = threading.Thread(target=start)
+            thread.start()
+
+            # Continua l'esecuzione del metodo get() senza attendere il completamento di start()
+            return JsonResponse({'all_campaniasport_articles': queryset})
+
+    def post(self, request):
+        """
+        metodo necessario a creare gli articoli su campaniasport per popolare la tabella letta dall'applicazione per
+        smartphone. Accetta in ingresso la lista di articoli piè un token necessario per capire se la fonte è sicura
+        :param request:
+        :return:
+        """
+        if request.method == 'GET':
+            "if -> vediamo se il token è corretto" \
+            "else faccio un return vuoto"
             queryset = serializers.serialize("json", CampaniaSportArticles.objects.all())
             queryset = json.loads(queryset)
 
             from django.http import JsonResponse
 
             return JsonResponse({'all_campaniasport_articles': queryset})
-
 
 def get_image_url(soup):
     soup_like_string = str(soup)
