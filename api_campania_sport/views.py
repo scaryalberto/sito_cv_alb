@@ -34,8 +34,8 @@ class ArticleView(APIView):
             queryset = json.loads(queryset)
 
             # Avvia il metodo start() in un thread separato, in modo che il metodo guinge fino alla fine senza attese
-            thread = threading.Thread(target=start)
-            thread.start()
+            #thread = threading.Thread(target=start)
+            #thread.start()
 
             # Continua l'esecuzione del metodo get() senza attendere il completamento di start()
             return JsonResponse({'all_campaniasport_articles': queryset})
